@@ -1,0 +1,804 @@
+{
+ "stats" : [
+{
+  "level": 1,
+  "hp": 150,
+  "mp": 150,
+  "damage": 50,
+  "defense": 20,
+  "exp": 500
+ },
+ {
+  "level": 2,
+  "hp": 200,
+  "mp": 200,
+  "damage": 60,
+  "defense": 25,
+  "exp": 750
+ },
+ {
+  "level": 3,
+  "hp": 250,
+  "mp": 250,
+  "damage": 70,
+  "defense": 30,
+  "exp": 1000
+ },
+ {
+  "level": 4,
+  "hp": 300,
+  "mp": 300,
+  "damage": 80,
+  "defense": 35,
+  "exp": 1250
+ },
+ {
+  "level": 5,
+  "hp": 350,
+  "mp": 350,
+  "damage": 90,
+  "defense": 40,
+  "exp": 1500
+ },
+ {
+  "level": 6,
+  "hp": 400,
+  "mp": 400,
+  "damage": 100,
+  "defense": 45,
+  "exp": 1750
+ },
+ {
+  "level": 7,
+  "hp": 450,
+  "mp": 450,
+  "damage": 110,
+  "defense": 50,
+  "exp": 2000
+ },
+ {
+  "level": 8,
+  "hp": 500,
+  "mp": 500,
+  "damage": 120,
+  "defense": 55,
+  "exp": 2250
+ },
+ {
+  "level": 9,
+  "hp": 550,
+  "mp": 550,
+  "damage": 130,
+  "defense": 60,
+  "exp": 2500
+ },
+ {
+  "level": 10,
+  "hp": 600,
+  "mp": 600,
+  "damage": 140,
+  "defense": 65,
+  "exp": 2750
+ },
+ {
+  "level": 11,
+  "hp": 650,
+  "mp": 650,
+  "damage": 150,
+  "defense": 70,
+  "exp": 3000
+ },
+ {
+  "level": 12,
+  "hp": 700,
+  "mp": 700,
+  "damage": 160,
+  "defense": 75,
+  "exp": 3250
+ },
+ {
+  "level": 13,
+  "hp": 750,
+  "mp": 750,
+  "damage": 170,
+  "defense": 80,
+  "exp": 3500
+ },
+ {
+  "level": 14,
+  "hp": 800,
+  "mp": 800,
+  "damage": 180,
+  "defense": 85,
+  "exp": 3750
+ },
+ {
+  "level": 15,
+  "hp": 850,
+  "mp": 850,
+  "damage": 190,
+  "defense": 90,
+  "exp": 4000
+ },
+ {
+  "level": 16,
+  "hp": 900,
+  "mp": 900,
+  "damage": 200,
+  "defense": 95,
+  "exp": 4250
+ },
+ {
+  "level": 17,
+  "hp": 950,
+  "mp": 950,
+  "damage": 210,
+  "defense": 100,
+  "exp": 4500
+ },
+ {
+  "level": 18,
+  "hp": 1000,
+  "mp": 1000,
+  "damage": 220,
+  "defense": 105,
+  "exp": 4750
+ },
+ {
+  "level": 19,
+  "hp": 1050,
+  "mp": 1050,
+  "damage": 230,
+  "defense": 110,
+  "exp": 5000
+ },
+ {
+  "level": 20,
+  "hp": 1100,
+  "mp": 1100,
+  "damage": 240,
+  "defense": 115,
+  "exp": 5250
+ },
+ {
+  "level": 21,
+  "hp": 1150,
+  "mp": 1150,
+  "damage": 250,
+  "defense": 120,
+  "exp": 5500
+ },
+ {
+  "level": 22,
+  "hp": 1200,
+  "mp": 1200,
+  "damage": 260,
+  "defense": 125,
+  "exp": 5750
+ },
+ {
+  "level": 23,
+  "hp": 1250,
+  "mp": 1250,
+  "damage": 270,
+  "defense": 130,
+  "exp": 6000
+ },
+ {
+  "level": 24,
+  "hp": 1300,
+  "mp": 1300,
+  "damage": 280,
+  "defense": 135,
+  "exp": 6250
+ },
+ {
+  "level": 25,
+  "hp": 1350,
+  "mp": 1350,
+  "damage": 290,
+  "defense": 140,
+  "exp": 6500
+ },
+ {
+  "level": 26,
+  "hp": 1400,
+  "mp": 1400,
+  "damage": 300,
+  "defense": 145,
+  "exp": 6750
+ },
+ {
+  "level": 27,
+  "hp": 1450,
+  "mp": 1450,
+  "damage": 310,
+  "defense": 150,
+  "exp": 7000
+ },
+ {
+  "level": 28,
+  "hp": 1500,
+  "mp": 1500,
+  "damage": 320,
+  "defense": 155,
+  "exp": 7250
+ },
+ {
+  "level": 29,
+  "hp": 1550,
+  "mp": 1550,
+  "damage": 330,
+  "defense": 160,
+  "exp": 7500
+ },
+ {
+  "level": 30,
+  "hp": 1600,
+  "mp": 1600,
+  "damage": 340,
+  "defense": 165,
+  "exp": 7750
+ },
+ {
+  "level": 31,
+  "hp": 1650,
+  "mp": 1650,
+  "damage": 350,
+  "defense": 170,
+  "exp": 8000
+ },
+ {
+  "level": 32,
+  "hp": 1700,
+  "mp": 1700,
+  "damage": 360,
+  "defense": 175,
+  "exp": 8250
+ },
+ {
+  "level": 33,
+  "hp": 1750,
+  "mp": 1750,
+  "damage": 370,
+  "defense": 180,
+  "exp": 8500
+ },
+ {
+  "level": 34,
+  "hp": 1800,
+  "mp": 1800,
+  "damage": 380,
+  "defense": 185,
+  "exp": 8750
+ },
+ {
+  "level": 35,
+  "hp": 1850,
+  "mp": 1850,
+  "damage": 390,
+  "defense": 190,
+  "exp": 9000
+ },
+ {
+  "level": 36,
+  "hp": 1900,
+  "mp": 1900,
+  "damage": 400,
+  "defense": 195,
+  "exp": 9250
+ },
+ {
+  "level": 37,
+  "hp": 1950,
+  "mp": 1950,
+  "damage": 410,
+  "defense": 200,
+  "exp": 9500
+ },
+ {
+  "level": 38,
+  "hp": 2000,
+  "mp": 2000,
+  "damage": 420,
+  "defense": 205,
+  "exp": 9750
+ },
+ {
+  "level": 39,
+  "hp": 2050,
+  "mp": 2050,
+  "damage": 430,
+  "defense": 210,
+  "exp": 10000
+ },
+ {
+  "level": 40,
+  "hp": 2100,
+  "mp": 2100,
+  "damage": 440,
+  "defense": 215,
+  "exp": 10250
+ },
+ {
+  "level": 41,
+  "hp": 2150,
+  "mp": 2150,
+  "damage": 450,
+  "defense": 220,
+  "exp": 10500
+ },
+ {
+  "level": 42,
+  "hp": 2200,
+  "mp": 2200,
+  "damage": 460,
+  "defense": 225,
+  "exp": 10750
+ },
+ {
+  "level": 43,
+  "hp": 2250,
+  "mp": 2250,
+  "damage": 470,
+  "defense": 230,
+  "exp": 11000
+ },
+ {
+  "level": 44,
+  "hp": 2300,
+  "mp": 2300,
+  "damage": 480,
+  "defense": 235,
+  "exp": 11250
+ },
+ {
+  "level": 45,
+  "hp": 2350,
+  "mp": 2350,
+  "damage": 490,
+  "defense": 240,
+  "exp": 11500
+ },
+ {
+  "level": 46,
+  "hp": 2400,
+  "mp": 2400,
+  "damage": 500,
+  "defense": 245,
+  "exp": 11750
+ },
+ {
+  "level": 47,
+  "hp": 2450,
+  "mp": 2450,
+  "damage": 510,
+  "defense": 250,
+  "exp": 12000
+ },
+ {
+  "level": 48,
+  "hp": 2500,
+  "mp": 2500,
+  "damage": 520,
+  "defense": 255,
+  "exp": 12250
+ },
+ {
+  "level": 49,
+  "hp": 2550,
+  "mp": 2550,
+  "damage": 530,
+  "defense": 260,
+  "exp": 12500
+ },
+ {
+  "level": 50,
+  "hp": 2600,
+  "mp": 2600,
+  "damage": 540,
+  "defense": 265,
+  "exp": 12750
+ },
+ {
+  "level": 51,
+  "hp": 2650,
+  "mp": 2650,
+  "damage": 550,
+  "defense": 270,
+  "exp": 13000
+ },
+ {
+  "level": 52,
+  "hp": 2700,
+  "mp": 2700,
+  "damage": 560,
+  "defense": 275,
+  "exp": 13250
+ },
+ {
+  "level": 53,
+  "hp": 2750,
+  "mp": 2750,
+  "damage": 570,
+  "defense": 280,
+  "exp": 13500
+ },
+ {
+  "level": 54,
+  "hp": 2800,
+  "mp": 2800,
+  "damage": 580,
+  "defense": 285,
+  "exp": 13750
+ },
+ {
+  "level": 55,
+  "hp": 2850,
+  "mp": 2850,
+  "damage": 590,
+  "defense": 290,
+  "exp": 14000
+ },
+ {
+  "level": 56,
+  "hp": 2900,
+  "mp": 2900,
+  "damage": 600,
+  "defense": 295,
+  "exp": 14250
+ },
+ {
+  "level": 57,
+  "hp": 2950,
+  "mp": 2950,
+  "damage": 610,
+  "defense": 300,
+  "exp": 14500
+ },
+ {
+  "level": 58,
+  "hp": 3000,
+  "mp": 3000,
+  "damage": 620,
+  "defense": 305,
+  "exp": 14750
+ },
+ {
+  "level": 59,
+  "hp": 3050,
+  "mp": 3050,
+  "damage": 630,
+  "defense": 310,
+  "exp": 15000
+ },
+ {
+  "level": 60,
+  "hp": 3100,
+  "mp": 3100,
+  "damage": 640,
+  "defense": 315,
+  "exp": 15250
+ },
+ {
+  "level": 61,
+  "hp": 3150,
+  "mp": 3150,
+  "damage": 650,
+  "defense": 320,
+  "exp": 15500
+ },
+ {
+  "level": 62,
+  "hp": 3200,
+  "mp": 3200,
+  "damage": 660,
+  "defense": 325,
+  "exp": 15750
+ },
+ {
+  "level": 63,
+  "hp": 3250,
+  "mp": 3250,
+  "damage": 670,
+  "defense": 330,
+  "exp": 16000
+ },
+ {
+  "level": 64,
+  "hp": 3300,
+  "mp": 3300,
+  "damage": 680,
+  "defense": 335,
+  "exp": 16250
+ },
+ {
+  "level": 65,
+  "hp": 3350,
+  "mp": 3350,
+  "damage": 690,
+  "defense": 340,
+  "exp": 16500
+ },
+ {
+  "level": 66,
+  "hp": 3400,
+  "mp": 3400,
+  "damage": 700,
+  "defense": 345,
+  "exp": 16750
+ },
+ {
+  "level": 67,
+  "hp": 3450,
+  "mp": 3450,
+  "damage": 710,
+  "defense": 350,
+  "exp": 17000
+ },
+ {
+  "level": 68,
+  "hp": 3500,
+  "mp": 3500,
+  "damage": 720,
+  "defense": 355,
+  "exp": 17250
+ },
+ {
+  "level": 69,
+  "hp": 3550,
+  "mp": 3550,
+  "damage": 730,
+  "defense": 360,
+  "exp": 17500
+ },
+ {
+  "level": 70,
+  "hp": 3600,
+  "mp": 3600,
+  "damage": 740,
+  "defense": 365,
+  "exp": 17750
+ },
+ {
+  "level": 71,
+  "hp": 3650,
+  "mp": 3650,
+  "damage": 750,
+  "defense": 370,
+  "exp": 18000
+ },
+ {
+  "level": 72,
+  "hp": 3700,
+  "mp": 3700,
+  "damage": 760,
+  "defense": 375,
+  "exp": 18250
+ },
+ {
+  "level": 73,
+  "hp": 3750,
+  "mp": 3750,
+  "damage": 770,
+  "defense": 380,
+  "exp": 18500
+ },
+ {
+  "level": 74,
+  "hp": 3800,
+  "mp": 3800,
+  "damage": 780,
+  "defense": 385,
+  "exp": 18750
+ },
+ {
+  "level": 75,
+  "hp": 3850,
+  "mp": 3850,
+  "damage": 790,
+  "defense": 390,
+  "exp": 19000
+ },
+ {
+  "level": 76,
+  "hp": 3900,
+  "mp": 3900,
+  "damage": 800,
+  "defense": 395,
+  "exp": 19250
+ },
+ {
+  "level": 77,
+  "hp": 3950,
+  "mp": 3950,
+  "damage": 810,
+  "defense": 400,
+  "exp": 19500
+ },
+ {
+  "level": 78,
+  "hp": 4000,
+  "mp": 4000,
+  "damage": 820,
+  "defense": 405,
+  "exp": 19750
+ },
+ {
+  "level": 79,
+  "hp": 4050,
+  "mp": 4050,
+  "damage": 830,
+  "defense": 410,
+  "exp": 20000
+ },
+ {
+  "level": 80,
+  "hp": 4100,
+  "mp": 4100,
+  "damage": 840,
+  "defense": 415,
+  "exp": 20250
+ },
+ {
+  "level": 81,
+  "hp": 4150,
+  "mp": 4150,
+  "damage": 850,
+  "defense": 420,
+  "exp": 20500
+ },
+ {
+  "level": 82,
+  "hp": 4200,
+  "mp": 4200,
+  "damage": 860,
+  "defense": 425,
+  "exp": 20750
+ },
+ {
+  "level": 83,
+  "hp": 4250,
+  "mp": 4250,
+  "damage": 870,
+  "defense": 430,
+  "exp": 21000
+ },
+ {
+  "level": 84,
+  "hp": 4300,
+  "mp": 4300,
+  "damage": 880,
+  "defense": 435,
+  "exp": 21250
+ },
+ {
+  "level": 85,
+  "hp": 4350,
+  "mp": 4350,
+  "damage": 890,
+  "defense": 440,
+  "exp": 21500
+ },
+ {
+  "level": 86,
+  "hp": 4400,
+  "mp": 4400,
+  "damage": 900,
+  "defense": 445,
+  "exp": 21750
+ },
+ {
+  "level": 87,
+  "hp": 4450,
+  "mp": 4450,
+  "damage": 910,
+  "defense": 450,
+  "exp": 22000
+ },
+ {
+  "level": 88,
+  "hp": 4500,
+  "mp": 4500,
+  "damage": 920,
+  "defense": 455,
+  "exp": 22250
+ },
+ {
+  "level": 89,
+  "hp": 4550,
+  "mp": 4550,
+  "damage": 930,
+  "defense": 460,
+  "exp": 22500
+ },
+ {
+  "level": 90,
+  "hp": 4600,
+  "mp": 4600,
+  "damage": 940,
+  "defense": 465,
+  "exp": 22750
+ },
+ {
+  "level": 91,
+  "hp": 4650,
+  "mp": 4650,
+  "damage": 950,
+  "defense": 470,
+  "exp": 23000
+ },
+ {
+  "level": 92,
+  "hp": 4700,
+  "mp": 4700,
+  "damage": 960,
+  "defense": 475,
+  "exp": 23250
+ },
+ {
+  "level": 93,
+  "hp": 4750,
+  "mp": 4750,
+  "damage": 970,
+  "defense": 480,
+  "exp": 23500
+ },
+ {
+  "level": 94,
+  "hp": 4800,
+  "mp": 4800,
+  "damage": 980,
+  "defense": 485,
+  "exp": 23750
+ },
+ {
+  "level": 95,
+  "hp": 4850,
+  "mp": 4850,
+  "damage": 990,
+  "defense": 490,
+  "exp": 24000
+ },
+ {
+  "level": 96,
+  "hp": 4900,
+  "mp": 4900,
+  "damage": 1000,
+  "defense": 495,
+  "exp": 24250
+ },
+ {
+  "level": 97,
+  "hp": 4950,
+  "mp": 4950,
+  "damage": 1010,
+  "defense": 500,
+  "exp": 24500
+ },
+ {
+  "level": 98,
+  "hp": 5000,
+  "mp": 5000,
+  "damage": 1020,
+  "defense": 505,
+  "exp": 24750
+ },
+ {
+  "level": 99,
+  "hp": 5050,
+  "mp": 5050,
+  "damage": 1030,
+  "defense": 510,
+  "exp": 25000
+ },
+ {
+  "level": 100,
+  "hp": 5100,
+  "mp": 5100,
+  "damage": 1040,
+  "defense": 515,
+  "exp": 25250
+ }
+]
+}
