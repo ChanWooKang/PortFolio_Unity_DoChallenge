@@ -10,10 +10,18 @@ public class MainScene : BaseScene
         base.Init();
         CurrScene = SceneType.MainScene;
     }
-   
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SceneLoadToInGame();
+        }
+    }
+
     public void SceneLoadToInGame()
     {
-        Managers._scene.LoadScene(SceneType.InGameScene);
+        StartCoroutine(Managers._scene.LoadCoroutine(SceneType.InGameScene));
     }
 
     public override void Clear() { base.Clear(); }

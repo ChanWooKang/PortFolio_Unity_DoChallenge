@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Floor
+  - Monster
+  - Interactive
+  - EquipSlot
+  - ItemSlot
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -11,12 +17,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Floor
+  - Player
+  - Block
+  - MonsterDisable
+  - Monster
+  - RootItem
   - 
   - 
   - 

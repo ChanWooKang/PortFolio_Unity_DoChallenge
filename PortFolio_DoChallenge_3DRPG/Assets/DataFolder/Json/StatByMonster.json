@@ -1,0 +1,31 @@
+{
+ "stats" : 
+	[
+		{
+		  "index": 1,
+		  "hp": 100,
+		  "damage": 20,
+		  "defense": 5,
+		  "movespeed": 8,
+		  "tracerange": 8,
+		  "attackrange": 2,
+		  "attackdelay": 1,
+		  "mingold": 50,
+		  "maxgold": 100,
+		  "exp": 50
+		 },
+		 {
+		  "index": 2,
+		  "hp": 150,
+		  "damage": 18,
+		  "defense": 8,
+		  "movespeed": 10,
+		  "tracerange": 8,
+		  "attackrange": 2,
+		  "attackdelay": 0.8,
+		  "mingold": 100,
+		  "maxgold": 200,
+		  "exp": 75
+		 }
+	] 
+}

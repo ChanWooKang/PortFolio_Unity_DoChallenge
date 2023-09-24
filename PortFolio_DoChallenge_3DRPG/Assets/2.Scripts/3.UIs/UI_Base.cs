@@ -34,7 +34,11 @@ public abstract class UI_Base : MonoBehaviour
     {
         UnityEngine.Object[] objects = null;
         if (_objects.TryGetValue(typeof(T), out objects) == false)
+        {
+            Debug.Log("Failed to Get");
             return null;
+        }
+            
         return objects[index] as T;
     }
 
