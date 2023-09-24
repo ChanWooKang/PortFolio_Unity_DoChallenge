@@ -24,12 +24,6 @@ public class PoolingManager : MonoBehaviour
     public List<GameObject>[] _pooledUnitList;
     public int _defPoolAmount = 5;
     public bool _canPoolExpend = true;
-
-    void Awake()
-    {
-
-    }
-
     static void Init()
     {
         if (uniqueInstance == null)

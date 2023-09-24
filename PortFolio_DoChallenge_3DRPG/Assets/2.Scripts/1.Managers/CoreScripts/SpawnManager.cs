@@ -13,6 +13,10 @@ public class SpawnManager : MonoBehaviour
     PoolingManager pool;
     float power = 5;
 
+    void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         Init();
@@ -20,7 +24,7 @@ public class SpawnManager : MonoBehaviour
 
     void Init()
     {
-        instance = this;
+        
         pool = PoolingManager.Pool;
     }
 
