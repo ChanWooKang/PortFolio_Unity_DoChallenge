@@ -101,11 +101,21 @@ namespace Defines
         Attack
     }
 
+    public enum SkillType
+    {
+        Unknown = 0,
+        Heal,
+        Dodge,
+        
+    }
+
     public enum MonsterType
     {
         Unknown = 0,
         Cactus,
         Mushroom,
+        Slime,
+        Turtleshell,
 
         Max_Cnt
     }
@@ -168,13 +178,6 @@ public struct STAT
     public StatType sType;
     public string sName;
     public float sValue;
-}
-
-[System.Serializable]
-public class Items
-{
-    public ItemData item;
-    public int weight;
 }
 
 [System.Serializable]

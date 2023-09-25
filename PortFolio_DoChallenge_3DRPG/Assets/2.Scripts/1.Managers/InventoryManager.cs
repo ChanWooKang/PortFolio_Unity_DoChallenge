@@ -17,6 +17,8 @@ public class InventoryManager : MonoBehaviour
 
     UI_Inventory inven;
     UI_Equipment equip;
+    UI_STAT stat;
+    UI_GOLD gold;
 
     void Awake()
     {
@@ -37,8 +39,15 @@ public class InventoryManager : MonoBehaviour
         EquipmentLoad();
         InventoryLoad();
 
+        if (stat == null)
+            stat = FindObjectOfType<UI_STAT>();
+        stat.Init();
+        if (gold == null)
+            gold = FindObjectOfType<UI_GOLD>();
+        gold.Init();
+
         if (inven == null)
-            inven = FindAnyObjectByType<UI_Inventory>();
+            inven = FindObjectOfType<UI_Inventory>();
 
         inven.CloseInventory();
 

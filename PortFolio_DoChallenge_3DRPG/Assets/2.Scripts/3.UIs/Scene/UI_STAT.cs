@@ -23,21 +23,29 @@ public class UI_STAT : UI_Base
     }
 
     PlayerStat pStat;
-    List<Text> list_Texts = new List<Text>();
+    List<Text> list_Texts;
     void Start()
     {
-        Init();
+        //Init();
         InventoryManager._inst.OnChangeStat -= OnSetUI;
         InventoryManager._inst.OnChangeStat += OnSetUI;
     }
 
     public override void Init()
     {
+        list_Texts = new List<Text>();
         Bind<Text>(typeof(Texts));
         for(int i = 0; i <= (int)Texts.PlusDefense; i++)
         {
             list_Texts.Add(Get<Text>(i));
         }
+        OnSetUI();
+    }
+
+    private void Update()
+    {
+        if (UI_Inventory.ActivatedInventory)
+            OnSetUI();
     }
 
     void OnSetUI()

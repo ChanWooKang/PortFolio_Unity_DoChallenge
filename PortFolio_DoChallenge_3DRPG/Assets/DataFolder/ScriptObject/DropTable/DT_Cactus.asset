@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc40d564a1c3c741a73d8553e7f83b7, type: 3}
+  m_Name: DT_Cactus
+  m_EditorClassIdentifier: 
+  list_Items:
+  - item: {fileID: 0}
+    weight: 200
+  pickCnt_Weights: c8000000
+  GoldItem: {fileID: 11400000, guid: b75ab78a177612849b8120eed025fedf, type: 2}

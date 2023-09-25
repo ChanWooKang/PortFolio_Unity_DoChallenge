@@ -2,13 +2,15 @@ using Defines;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class UI_Inventory : UI_Base
 {
     enum GameObjects
     {
         Inventory_Base,
-        Inventory_Slot_Parent
+        Inventory_Slot_Parent,
+        Close
     }
 
     public static bool ActivatedInventory = false;
@@ -56,15 +58,15 @@ public class UI_Inventory : UI_Base
         Inventory_Base = GetObject((int)GameObjects.Inventory_Base);
         Slots_Parent = GetObject((int)GameObjects.Inventory_Slot_Parent);
         slots = Slots_Parent.GetComponentsInChildren<UI_Slot>();
+        GameObject go = GetObject((int)GameObjects.Close);
+        BindEvent(go, (PointerEventData data) => { if (data.button == PointerEventData.InputButton.Left) CloseInventory(); }, UIEvent.Click);
     }
 
     void TryOpenInventory()
     {
         if(Input.GetKeyDown(KeyCode.I))
         {
-            ActivatedInventory = !ActivatedInventory;
-
-            if (ActivatedInventory)
+            if (ActivatedInventory == false)
                 OpenInventory();
             else
                 CloseInventory();
@@ -73,11 +75,14 @@ public class UI_Inventory : UI_Base
 
     void OpenInventory()
     {
+        ActivatedInventory = true;
+        InventoryManager._inst.OnChangeStat?.Invoke();
         Inventory_Base.SetActive(true);
     }
 
     public void CloseInventory()
     {
+        ActivatedInventory = false;
         Inventory_Base.SetActive(false);
     }
 

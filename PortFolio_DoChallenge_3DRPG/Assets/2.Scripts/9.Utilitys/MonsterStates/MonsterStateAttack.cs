@@ -7,7 +7,7 @@ public class MonsterStateAttack : TSingleton<MonsterStateAttack>, IFSMState<Mons
 {
     public void Enter(MonsterCtrl m)
     {
-        m.Agent.SetDestination(transform.position);
+        
         m.nowCombo = ComboType.Hit1;
     }
 
@@ -17,22 +17,18 @@ public class MonsterStateAttack : TSingleton<MonsterStateAttack>, IFSMState<Mons
             m.ChangeState(MonsterStatePatrol._inst);
         else
         {
-            if (m.IsCloseTarget(m.target.position, m._stat.AttackRange)) 
+            m.TurnTowardPlayer();
+            if (m.IsCloseTarget(m.target.position, m.stat.AttackRange)) 
             {
                 m.cntTime += Time.deltaTime;
-                if (m.cntTime > m._stat.AttackDelay && m.isAttack == false) 
+                if (m.cntTime > m.stat.AttackDelay && m.isAttack == false) 
                 {
                     m.AttackFunc();
-                    m.delayTime = 0;
-                }
-                else
-                {
-                    m.TurnTowardPlayer();
+                    m.cntTime = 0;
                 }
             }
             else
             {
-                m.TurnTowardPlayer();
                 if (m.isAttack == false)
                     m.ChangeState(MonsterStateTrace._inst);
             }

@@ -8,13 +8,20 @@ public class MonsterStateDie : TSingleton<MonsterStateDie>, IFSMState<MonsterCtr
     public void Enter(MonsterCtrl m)
     {
         m.ChangeLayer(LayerType.MonsterDisable);
+        m.Agent.destination = m.transform.position;
         m.State = MonsterState.Die;
         m.cntTime = 0;
-        StartCoroutine(DeadAction(m));
+        
     }
 
     public void Execute(MonsterCtrl m)
     {
+        if(m.isActiveAndEnabled)
+        {
+            m.cntTime += Time.deltaTime;
+            if (m.cntTime > m.delayTime)
+                m.OnDeadEvent();
+        }
     }
 
     public void Exit(MonsterCtrl m)
@@ -22,9 +29,5 @@ public class MonsterStateDie : TSingleton<MonsterStateDie>, IFSMState<MonsterCtr
 
     }
 
-    IEnumerator DeadAction(MonsterCtrl m)
-    {
-        yield return new WaitForSeconds(m.delayTime);
-        m.OnDeadEvent();       
-    }
+
 }

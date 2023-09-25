@@ -26,6 +26,32 @@
 		  "mingold": 100,
 		  "maxgold": 200,
 		  "exp": 75
+		 },
+		 {
+		  "index": 3,
+		  "hp": 180,
+		  "damage": 22,
+		  "defense": 8,
+		  "movespeed": 10,
+		  "tracerange": 8,
+		  "attackrange": 2,
+		  "attackdelay": 0.8,
+		  "mingold": 80,
+		  "maxgold": 180,
+		  "exp": 90
+		 },
+		 {
+		  "index": 4,
+		  "hp": 320,
+		  "damage": 15,
+		  "defense": 15,
+		  "movespeed": 10,
+		  "tracerange": 8,
+		  "attackrange": 2,
+		  "attackdelay": 0.8,
+		  "mingold": 250,
+		  "maxgold": 320,
+		  "exp": 120
 		 }
 	] 
 }

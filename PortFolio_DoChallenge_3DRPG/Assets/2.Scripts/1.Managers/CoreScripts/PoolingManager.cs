@@ -24,6 +24,12 @@ public class PoolingManager : MonoBehaviour
     public List<GameObject>[] _pooledUnitList;
     public int _defPoolAmount = 5;
     public bool _canPoolExpend = true;
+
+    void Awake()
+    {
+        
+    }
+
     static void Init()
     {
         if (uniqueInstance == null)
@@ -174,5 +180,10 @@ public class PoolingManager : MonoBehaviour
         return tmps;
     }
 
-    public static void DestroyAPS(GameObject go) { go.SetActive(false); }
+    public static void DestroyAPS(GameObject go) 
+    {
+        go.SetActive(false);
+        if (go.transform.parent != uniqueInstance.transform)
+            go.transform.SetParent(uniqueInstance.transform);
+    }
 }

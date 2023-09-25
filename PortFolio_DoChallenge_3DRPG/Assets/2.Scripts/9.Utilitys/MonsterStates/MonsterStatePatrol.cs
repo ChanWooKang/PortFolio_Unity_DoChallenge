@@ -7,9 +7,9 @@ public class MonsterStatePatrol : TSingleton<MonsterStatePatrol>, IFSMState<Mons
 {
     public void Enter(MonsterCtrl m)
     {
-        m.Agent.SetDestination(transform.position);
         m.targetPos = m._offSet;
         m.cntTime = 0;
+        m.Agent.speed = m.stat.MoveSpeed;
         m.State = MonsterState.Patrol;
     }
 
@@ -17,7 +17,7 @@ public class MonsterStatePatrol : TSingleton<MonsterStatePatrol>, IFSMState<Mons
     {
         if(m.target != null)
         {
-            if (m.IsCloseTarget(m.target.position, m._stat.TraceRange))
+            if (m.IsCloseTarget(m.target.position, m.stat.TraceRange))
                 m.ChangeState(MonsterStateTrace._inst);
             else
             {

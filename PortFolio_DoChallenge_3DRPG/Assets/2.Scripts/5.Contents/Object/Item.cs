@@ -37,7 +37,6 @@ public class Item : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _colider = GetComponent<SphereCollider>();
-        itemSO.SetData();
         isShoot = false;
     }
 

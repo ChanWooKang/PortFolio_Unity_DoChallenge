@@ -8,7 +8,7 @@ public class AutoRespawnManager : MonoBehaviour
 {
     PoolingManager pool;
     SpawnManager spawn;
-    Queue<MonsterType> _monsterQ = new Queue<MonsterType>();
+    Queue<MonsterType> _monsterQ;
 
     int _currAmount = 0;
     int _totalAmount = 0;
@@ -36,6 +36,7 @@ public class AutoRespawnManager : MonoBehaviour
     {
         pool = PoolingManager.Pool;
         spawn = SpawnManager._inst;
+        _monsterQ = new Queue<MonsterType>();
         for (int i = 0; i < pool._poolingUnits.Length; i++)
         {
             if (pool._poolingUnits[i].pType != PoolType.Monster)
@@ -44,7 +45,7 @@ public class AutoRespawnManager : MonoBehaviour
             for (int j = 0; j < pool._poolingUnits[i].amount; j++)
             {
                 MonsterCtrl mc = pool._poolingUnits[i].prefab.GetComponent<MonsterCtrl>();
-                _monsterQ.Enqueue(mc._stat.Type);
+                _monsterQ.Enqueue(mc.mType);
             }
             SetKeepMonsterCount(pool._poolingUnits[i].amount);
         }

@@ -9,7 +9,7 @@ public class SpawnManager : MonoBehaviour
     static SpawnManager instance;
     public static SpawnManager _inst {  get { return instance; } }
     public Action<MonsterType, int> OnSpawnEvent;
-    public List<SpawnPoint> points = new List<SpawnPoint>();
+    public List<SpawnPoint> points;
     PoolingManager pool;
     float power = 5;
 
@@ -19,12 +19,6 @@ public class SpawnManager : MonoBehaviour
     }
     void Start()
     {
-        Init();
-    }
-
-    void Init()
-    {
-        
         pool = PoolingManager.Pool;
     }
 
@@ -57,7 +51,7 @@ public class SpawnManager : MonoBehaviour
             return null;
         }
 
-        GameObject go = pool.InstatiateAPS(Util.ConvertEnum(type));
+        GameObject go = pool.InstatiateAPS(Util.ConvertEnum(type), tr.position, tr.rotation, Vector3.one);
         if(go.TryGetComponent<MonsterCtrl>(out MonsterCtrl mc) == false)
         {
             Destroy(go);

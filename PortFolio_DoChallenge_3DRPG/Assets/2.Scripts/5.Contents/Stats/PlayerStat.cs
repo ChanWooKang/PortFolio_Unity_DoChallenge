@@ -62,7 +62,7 @@ public class PlayerStat : BaseStat
 
     void Start()
     {
-        LoadPlayerData();
+        LoadPlayer();
         LoadPlusData();
         InventoryManager._inst.OnChangeStat?.Invoke();
     }
@@ -70,15 +70,13 @@ public class PlayerStat : BaseStat
     void Init()
     {
         _level = 1;
-        _maxhp = 200;
-        _maxmp = 200;
+        _hp = _maxhp = 200;
+        _mp = _maxmp = 200;
         _damage = 50;
         _defense = 5;
-        _moveSpeed = 10;
         _exp = 0;
         _gold = 0;
-        _hp = _maxhp;
-        _mp = _maxmp;
+        _moveSpeed = 10;
     }
 
     public float EXP()
@@ -89,7 +87,7 @@ public class PlayerStat : BaseStat
         }
         else
         {
-            if(Managers._data.StatDict.TryGetValue(_level-1, out StatByLevel stat))
+            if(Managers._data.StatDict.TryGetValue(_level, out StatByLevel stat))
             {
                 return _exp - stat.exp;
             }
@@ -134,39 +132,37 @@ public class PlayerStat : BaseStat
         _defense = stat.defense;
     }
 
-    public void LoadPlayerData()
+    public void LoadPlayer()
     {
-        string data = Managers._file.LoadJsonFile("PlayerData");
-        if (string.IsNullOrEmpty(data) == false)
+        string jsonData = Managers._file.LoadJsonFile("PlayerData");
+        if(string.IsNullOrEmpty(jsonData) == false)
         {
-            SavePlayerStat stat = JsonUtility.FromJson<SavePlayerStat>(data);
-            _level = stat.level;
-            _hp = stat.hp;
-            _mp = stat.mp;
-            _exp = stat.exp;
-            _gold = stat.gold;
-            _moveSpeed = 10;
-            StatByLevel SBL;
-            if(Managers._data.StatDict.TryGetValue(_level, out SBL))
+            SavePlayerStat sps = JsonUtility.FromJson<SavePlayerStat>(jsonData);
+            _level = sps.level;
+            if(Managers._data.StatDict.TryGetValue(_level,out StatByLevel SBL))
             {
                 _maxhp = SBL.hp;
                 _maxmp = SBL.mp;
                 _damage = SBL.damage;
                 _defense = SBL.defense;
+
+                _hp = Mathf.Min(sps.hp, _maxhp);
+                _mp = Mathf.Min(sps.mp, _maxmp);
+                _exp = (_level > 1) ? sps.exp : 0;
+                _gold = sps.gold;
+                _moveSpeed = 10;
             }
             else
             {
-                Debug.Log("Failed To Load PlayerStat By StatByLevel");
                 Init();
             }
-
         }
         else
         {
-            Debug.Log("Failed To Load PlayerStat By SavePlayerStat");
             Init();
         }
     }
+
 
     public void LoadPlusData()
     {

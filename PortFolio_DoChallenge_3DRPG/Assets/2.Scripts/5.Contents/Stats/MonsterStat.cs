@@ -11,6 +11,8 @@ public class MonsterStat : BaseStat
     [SerializeField]
     protected float _tracerange;
     [SerializeField]
+    protected float _traceSpeed;
+    [SerializeField]
     protected float _attackrange;
     [SerializeField]
     protected float _attackDelay;
@@ -23,6 +25,7 @@ public class MonsterStat : BaseStat
 
     public MonsterType Type {  get { return _type; } }
     public float TraceRange { get { return _tracerange; } }
+    public float TraceSpeed { get { return _traceSpeed; } }
     public float AttackRange { get { return _attackrange; } }
     public float AttackDelay { get { return _attackDelay; } }
     public int Gold { get { return Random.Range(_mingold, _maxgold); } }
@@ -49,7 +52,8 @@ public class MonsterStat : BaseStat
             _maxhp = stat.hp;
             _damage = stat.damage;
             _defense = stat.defense;
-            _moveSpeed = stat.movespeed;
+            _moveSpeed = 6;
+            _traceSpeed = stat.movespeed;
             _tracerange = stat.tracerange;
             _attackrange = stat.attackrange;
             _attackDelay = stat.attackdelay;

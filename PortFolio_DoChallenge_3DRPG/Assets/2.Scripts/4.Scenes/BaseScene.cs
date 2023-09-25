@@ -11,6 +11,7 @@ public class BaseScene : MonoBehaviour
     public SceneType CurrScene { get; protected set; } = SceneType.UnKnown;
     protected virtual void Init() 
     {
+        //PoolingManager.Pool.SettingData();
         Object obj = GameObject.FindObjectOfType(typeof(EventSystem));
         if (obj == null)
             Managers._resource.Instantiate("UI/EventSystem").name = "@EventSystem";

@@ -15,11 +15,5 @@ public class SOItem : ScriptableObject
     public string description;
     public List<STAT> sList = new List<STAT>();
     public Sprite Icon;
-
-    public ItemData data;
-    
-    public void SetData()
-    {
-        data.Init(Name, iType, eType, maxStack, price, description, sList);
-    }    
+  
 }

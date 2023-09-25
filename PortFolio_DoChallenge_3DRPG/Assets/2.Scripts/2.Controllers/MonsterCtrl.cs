@@ -7,7 +7,7 @@ using Defines;
 public class MonsterCtrl : FSM<MonsterCtrl>
 {
     //Components
-    public MonsterStat _stat;
+    MonsterStat _stat;
     Animator _anim;
     Rigidbody _rb;
     CapsuleCollider _colider;
@@ -53,15 +53,32 @@ public class MonsterCtrl : FSM<MonsterCtrl>
         }
     }
 
+    public MonsterStat stat 
+    {
+        get 
+        {
+            if(_stat == null)
+            {
+                _stat = GetComponent<MonsterStat>();
+                _stat.SetStat(mType);
+            }
+            return _stat; 
+        } 
+    }
+
     public ComboType nowCombo { get { return _nowCombo; } set { _nowCombo = value; } }
     
     public PlayerCtrl player { get { return PlayerCtrl._inst; } }
 
+    void Awake()
+    {
+        InitComponents();
+    }
 
     void Start()
     {
-        InitComponents();
-        State = MonsterState.Idle;
+        InitState(this, MonsterStateInitial._inst);
+        Managers._ui.MakeWorldSpace<UI_HPBar>(transform);
     }
 
     void Update()
@@ -96,6 +113,7 @@ public class MonsterCtrl : FSM<MonsterCtrl>
     public void InitDatas()
     {
         targetPos = Vector3.zero;
+        stat.HP = stat.MaxHP;
         lastCallTime = 0;
         delayTime = 2.0f;
         isDead = false;
@@ -202,7 +220,6 @@ public class MonsterCtrl : FSM<MonsterCtrl>
     {
         Vector3 dir = pos - transform.position;
         _agent.SetDestination(pos);
-        _agent.speed = _stat.MoveSpeed;
         transform.rotation = Quaternion.Slerp(transform.rotation,Quaternion.LookRotation(dir), 20 * Time.deltaTime);
     }
 
@@ -226,26 +243,25 @@ public class MonsterCtrl : FSM<MonsterCtrl>
             return;
         }
 
+        _agent.avoidancePriority = 51;
         State = MonsterState.Attack;
         isAttack = true;
     }
 
     public void OnAttackEvent()
     {
-        if(target != null && player.State == PlayerState.Die)
+        if(target != null && player.State != PlayerState.Die)
         {
             if(IsCloseTarget(target.position, _stat.AttackRange))
             {
-                if (player.OnDamage(_stat))
-                {
-                    target = null;
-                    ChangeState(MonsterStatePatrol._inst);
-                }
+                player.OnDamage(_stat);
             }
         }
+       
     }
     public void OffAttackEvent()
     {
+        _agent.avoidancePriority = 50;
         isAttack = false;
         State = MonsterState.Trace;
     }
@@ -282,9 +298,11 @@ public class MonsterCtrl : FSM<MonsterCtrl>
     {
         SpawnManager._inst.MonsterDespawn(gameObject);
         ChangeColor(Color.white);
+        ChangeState(MonsterStateDisable._inst);
         _dropTable.ItemDrop(transform, _stat.Gold);
         _dropTable.ItemDrop(transform);
-        ChangeState(MonsterStateDisable._inst);
+
+        InventoryManager._inst.OnChangeStat?.Invoke();
     }
 
     public void OnResurrectEvent()
@@ -292,6 +310,6 @@ public class MonsterCtrl : FSM<MonsterCtrl>
         if(_colider.enabled == false)
             _colider.enabled = true;
         ChangeLayer(LayerType.Monster);
-        State = MonsterState.Idle;
+        ChangeState(MonsterStateInitial._inst);
     }
 }

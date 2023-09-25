@@ -8,13 +8,15 @@ public class InGameScene : BaseScene
     {
         base.Init();
         CurrScene = Defines.SceneType.InGameScene;
+
+        PoolingManager.Pool.SettingData();
     }
 
     public override void Clear()
     {
         base.Clear();
-
-        if(InventoryManager._inst != null)
+        
+        if (InventoryManager._inst != null)
         {
             InventoryManager._inst.InventorySave();
             InventoryManager._inst.EquipmentSave();

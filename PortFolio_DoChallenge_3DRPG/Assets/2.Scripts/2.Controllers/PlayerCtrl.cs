@@ -10,7 +10,7 @@ public class PlayerCtrl : MonoBehaviour
     static PlayerCtrl instance;
    
     public PlayerStat _stat;
-    public WeaponCtrl _weapon;
+    //public WeaponCtrl _weapon;
 
     Animator _anim;
     Rigidbody _rb;
@@ -30,6 +30,7 @@ public class PlayerCtrl : MonoBehaviour
     GameObject _nearObj;
     InteractType _nearType;
     PlayerState _state = PlayerState.Idle;
+    //SkillType _sType = SkillType.Unknown;
 
     public static PlayerCtrl _inst { get { return instance; } }
     public PlayerState State
@@ -55,11 +56,18 @@ public class PlayerCtrl : MonoBehaviour
                     _anim.CrossFade("Attack", 0.1f, -1, 0);
                     break;
                 case PlayerState.Skill:
+                    {
+                        //switch (_sType)
+                        //{
+                        //    case SkillType.Unknown:
+                        //        break;
+
+                        //}
+                    }
                     break;
             }
         }
     }
-
     public GameObject LockTarget { get { return _locktarget; } set { _locktarget = value; } }
 
     void Awake()
@@ -185,7 +193,7 @@ public class PlayerCtrl : MonoBehaviour
 
     void OnMouseEvent(MouseEvent evt)
     {
-        if (isDead || UI_Inventory.ActivatedInventory)
+        if (isDead || UI_Inventory.ActivatedInventory || ActivatedInteract)
             return;
 
         switch (_state)
@@ -198,7 +206,8 @@ public class PlayerCtrl : MonoBehaviour
                 break;
             case PlayerState.Attack:
                 {
-
+                    if (evt == MouseEvent.PointerUp)
+                        isStopAttack = true;
                 }
                 break;
         }
@@ -239,6 +248,9 @@ public class PlayerCtrl : MonoBehaviour
 
     void UpdateMove()
     {
+        if (ActivatedInteract)
+            return;
+
         CheckAttackable();
         Vector3 dir = _destPos - transform.position;
         dir.y = 0;
@@ -292,21 +304,25 @@ public class PlayerCtrl : MonoBehaviour
             }
         }
 
+       
+    }
+
+    public void OffAttackEvent()
+    {
         if (isStopAttack)
             State = PlayerState.Idle;
         else
             State = PlayerState.Attack;
     }
 
-    public bool OnDamage(BaseStat stat)
+    public void OnDamage(BaseStat stat)
     {
         if (isDead)
-            return true;
+            return;
 
         isDead = _stat.GetHit(stat);
         StopCoroutine(OnDamageEvent());
         StartCoroutine(OnDamageEvent());
-        return isDead;
     }
 
     IEnumerator OnDamageEvent()
@@ -350,30 +366,71 @@ public class PlayerCtrl : MonoBehaviour
         _stat.UsePotion(type, value);
     }
 
+    public void SkillEffect(SkillType type, SOSkill sSkill)
+    {
+        switch (type)
+        {
+            case SkillType.Heal:
+                HealEffect(sSkill);
+                break;
+            case SkillType.Dodge:
+                DodgeEffect(sSkill);
+                break;
+        }
+    }
+
+    void HealEffect(SOSkill sSkill)
+    {
+       
+        float value = _stat.MaxHP * sSkill.effectValue;
+        UsePotion(StatType.HP, value);
+        StopCoroutine(InstanceParticle(sSkill.skillName));
+        StartCoroutine(InstanceParticle(sSkill.skillName));
+        
+    }
+
+    void DodgeEffect(SOSkill sSkill)
+    {
+       
+    }
+
+    IEnumerator InstanceParticle(string name)
+    {
+        GameObject go = PoolingManager.Pool.InstatiateAPS(name, transform.position, Quaternion.identity, Vector3.one, gameObject);
+        ParticleSystem particle = go.GetComponentInChildren<ParticleSystem>();
+        particle.Play(true);
+
+        while (particle.IsAlive(true))
+        {
+            yield return null;
+        }
+        go.DestroyAPS();
+    }
+
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(Util.ConvertEnum(TagType.Interactive)))
-        {
-            _nearObj = other.gameObject;
-            if(_nearObj.TryGetComponent<InteractObject>(out InteractObject io))
-            {
-                if(io.Type == InteractType.RootItem)
-                {
-                    if(_nearObj.TryGetComponent<Item>(out Item item))
-                    {
-                        if(item.itemSO.iType == ItemType.Gold)
-                        {
-                            item.Root();
-                            ClearNearObject();
-                        }
-                    }
-                }
-            }
-            else
-            {
-                ClearNearObject();
-            }
-        }
+        //if (other.CompareTag(Util.ConvertEnum(TagType.Interactive)))
+        //{
+        //    _nearObj = other.gameObject;
+        //    if(_nearObj.TryGetComponent<InteractObject>(out InteractObject io))
+        //    {
+        //        if(io.Type == InteractType.RootItem)
+        //        {
+        //            if(_nearObj.TryGetComponent<Item>(out Item item))
+        //            {
+        //                if(item.itemSO.iType == ItemType.Gold)
+        //                {
+        //                    item.Root();
+        //                    ClearNearObject();
+        //                }
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        ClearNearObject();
+        //    }
+        //}
     }
 
     void OnTriggerStay(Collider other)

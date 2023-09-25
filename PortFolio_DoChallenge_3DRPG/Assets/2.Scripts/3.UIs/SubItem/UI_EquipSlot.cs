@@ -85,7 +85,6 @@ public class UI_EquipSlot : UI_Base , IPointerClickHandler, IBeginDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("OnBeginDrag 호출");
         if (item != null)
         {
             if (InventoryManager.IsChangingEquip == false)
@@ -104,7 +103,6 @@ public class UI_EquipSlot : UI_Base , IPointerClickHandler, IBeginDragHandler, I
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("OnDrag 호출");
         if (item != null)
         {
             DragSlotCtrl._inst.rect.position = eventData.position;
@@ -113,7 +111,6 @@ public class UI_EquipSlot : UI_Base , IPointerClickHandler, IBeginDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag 호출");
         DragSlotCtrl._inst.SetAlpha(0);
         DragSlotCtrl._inst.SetCanvas(true);
         DragSlotCtrl._inst.Slot_FromInven = null;
@@ -123,7 +120,6 @@ public class UI_EquipSlot : UI_Base , IPointerClickHandler, IBeginDragHandler, I
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("OnDrop 호출");
         if(DragSlotCtrl._inst.Slot_FromInven != null && DragSlotCtrl._inst.Slot_FromInven.item.iType == ItemType.Equipment)
         {
             if(DragSlotCtrl._inst.Slot_FromInven.item.eType == slotType)
