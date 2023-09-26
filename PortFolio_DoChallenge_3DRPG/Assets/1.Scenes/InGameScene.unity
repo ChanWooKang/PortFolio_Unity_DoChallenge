@@ -10590,6 +10590,10 @@ MonoBehaviour:
     pType: 2
     prefab: {fileID: 58147446384700920, guid: 8d99ef7be74c519499ef6c5cd3858280, type: 3}
     amount: 1
+  - name: Slash_Effect
+    pType: 2
+    prefab: {fileID: 2501807838471656456, guid: 6035a66be56b7b240874ec51cbe38a01, type: 3}
+    amount: 1
   _defPoolAmount: 5
   _canPoolExpend: 1
 --- !u!4 &1109255563
@@ -17242,7 +17246,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2d089513ae4adfc48a683c362ad9992c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2a5c892bdd014164da633b8c6fd0f246, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

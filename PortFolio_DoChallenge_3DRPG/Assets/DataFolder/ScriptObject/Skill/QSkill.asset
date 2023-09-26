@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 818c56401152f3e4189ba8611d5dbdc0, type: 3}
   m_Name: QSkill
   m_EditorClassIdentifier: 
+  _type: 3
+  skillName: Slash_Effect
   key: 113
-  cool: 10
+  cool: 2
+  effectValue: 20
+  sList: []

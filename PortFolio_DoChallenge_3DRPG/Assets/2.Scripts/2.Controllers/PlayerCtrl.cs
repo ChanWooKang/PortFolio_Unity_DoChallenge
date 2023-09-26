@@ -33,7 +33,7 @@ public class PlayerCtrl : MonoBehaviour
     PlayerState _state = PlayerState.Idle;
     SkillType _sType = SkillType.Unknown;
 
-    Vector3 DodgePoint;
+    Vector3 mousePoint;
 
     public static PlayerCtrl _inst { get { return instance; } }
     public PlayerState State
@@ -65,7 +65,9 @@ public class PlayerCtrl : MonoBehaviour
                             case SkillType.Dodge:
                                 _anim.CrossFade("Dodge", 0.1f, -1, 0);
                                 break;
-
+                            case SkillType.Slash:
+                                _anim.CrossFade("Slash", 0.1f, -1, 0);
+                                break;
                         }
                     }
                     break;
@@ -148,7 +150,7 @@ public class PlayerCtrl : MonoBehaviour
         _locktarget = null;
         _nearType = InteractType.Unknown;
         _destPos = transform.position;
-        DodgePoint = transform.position;
+        mousePoint = transform.position;
         ActiveDodge = false;
     }
 
@@ -311,11 +313,11 @@ public class PlayerCtrl : MonoBehaviour
 
     void UpdateDodge()
     {
-        if (DodgePoint != transform.position)
+        if (mousePoint != transform.position)
         {
-            if(DodgePoint != Vector3.zero)
+            if(mousePoint != Vector3.zero)
             {
-                Quaternion rot = Quaternion.LookRotation(DodgePoint);
+                Quaternion rot = Quaternion.LookRotation(mousePoint);
                 transform.rotation = Quaternion.Lerp(transform.rotation, rot, 20.0f * Time.deltaTime);
             }
         }
@@ -408,7 +410,24 @@ public class PlayerCtrl : MonoBehaviour
             case SkillType.Dodge:
                 DodgeEffect(sSkill);
                 break;
+            case SkillType.Slash:
+                SlashEffect(sSkill);
+                break;
         }
+    }
+
+    bool CheckMousePosition()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit rhit, 100.0f, (1 << (int)LayerType.Floor)))
+        {
+            mousePoint = rhit.point - transform.position;
+            mousePoint.y = 0;
+            mousePoint = mousePoint.normalized;
+            return true;
+        }
+
+        return false;
     }
 
     void HealEffect(SOSkill sSkill)
@@ -416,24 +435,45 @@ public class PlayerCtrl : MonoBehaviour
        
         float value = _stat.MaxHP * sSkill.effectValue;
         UsePotion(StatType.HP, value);
-        StopCoroutine(InstanceParticle(sSkill.skillName));
-        StartCoroutine(InstanceParticle(sSkill.skillName));
+        StopCoroutine(OnHealEvent(sSkill.skillName));
+        StartCoroutine(OnHealEvent(sSkill.skillName));
         
+    }
+
+    void SlashEffect(SOSkill sSkill)
+    {
+        if(CheckMousePosition())
+        {
+            StopCoroutine(OnSlashEvent(sSkill));
+            StartCoroutine(OnSlashEvent(sSkill));
+        }
     }
 
     void DodgeEffect(SOSkill sSkill)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit rhit, 100.0f, (1 << (int)LayerType.Floor)))
+        if(CheckMousePosition())
         {
-            DodgePoint= rhit.point - transform.position;
-            DodgePoint.y = 0;
-            DodgePoint = DodgePoint.normalized;
-
-            StopCoroutine(OnDodgeEvent(sSkill.effectValue,DodgePoint));
-            StartCoroutine(OnDodgeEvent(sSkill.effectValue, DodgePoint));
+            StopCoroutine(OnDodgeEvent(sSkill.effectValue, mousePoint));
+            StartCoroutine(OnDodgeEvent(sSkill.effectValue, mousePoint));
         }
     }
+
+    IEnumerator OnSlashEvent(SOSkill sk)
+    {
+        _sType = SkillType.Slash;
+        State = PlayerState.Skill;
+        yield return new WaitForSeconds(0.2f);
+        GameObject go = PoolingManager.Pool.InstatiateAPS(sk.skillName,transform.position, Quaternion.identity, Vector3.one, gameObject);
+        if(go.TryGetComponent<SlashEffect>(out SlashEffect slash) == false)
+            slash = go.AddComponent<SlashEffect>();
+        slash.StartEffect(mousePoint, sk.effectValue);
+        yield return new WaitForSeconds(0.5f);
+        mousePoint = transform.position;
+        _destPos = transform.position;
+        _sType = SkillType.Unknown;
+        State = PlayerState.Move;
+    }
+
 
     IEnumerator OnDodgeEvent(float power,Vector3 dir)
     {
@@ -443,14 +483,14 @@ public class PlayerCtrl : MonoBehaviour
         _rb.AddForce(dir * power, ForceMode.Impulse);
         yield return new WaitForSeconds(0.7f);
 
-        DodgePoint = transform.position;
+        mousePoint = transform.position;
         _destPos = transform.position;
         ActiveDodge = false;
         _sType = SkillType.Unknown;
         State = PlayerState.Move;
     }
 
-    IEnumerator InstanceParticle(string name)
+    IEnumerator OnHealEvent(string name)
     {
         GameObject go = PoolingManager.Pool.InstatiateAPS(name, transform.position, Quaternion.identity, Vector3.one, gameObject);
         ParticleSystem particle = go.GetComponentInChildren<ParticleSystem>();

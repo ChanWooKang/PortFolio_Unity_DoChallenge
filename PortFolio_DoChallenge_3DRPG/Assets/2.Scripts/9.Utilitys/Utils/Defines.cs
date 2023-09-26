@@ -106,6 +106,7 @@ namespace Defines
         Unknown = 0,
         Heal,
         Dodge,
+        Slash,
         
     }
 
