@@ -243,6 +243,9 @@ public class MonsterCtrl : FSM<MonsterCtrl>
             return;
         }
 
+        if (player.ActiveDodge)
+            return;
+
         _agent.avoidancePriority = 51;
         State = MonsterState.Attack;
         isAttack = true;

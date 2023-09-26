@@ -22,15 +22,18 @@ public class PlayerCtrl : MonoBehaviour
     bool isStopAttack;
     bool isDead;
 
-    bool ActivatedInteract;
+    public bool ActiveDodge;
 
     Vector3 _destPos;
     GameObject _locktarget;
     [SerializeField]
     GameObject _nearObj;
+
     InteractType _nearType;
     PlayerState _state = PlayerState.Idle;
-    //SkillType _sType = SkillType.Unknown;
+    SkillType _sType = SkillType.Unknown;
+
+    Vector3 DodgePoint;
 
     public static PlayerCtrl _inst { get { return instance; } }
     public PlayerState State
@@ -57,12 +60,13 @@ public class PlayerCtrl : MonoBehaviour
                     break;
                 case PlayerState.Skill:
                     {
-                        //switch (_sType)
-                        //{
-                        //    case SkillType.Unknown:
-                        //        break;
+                        switch (_sType)
+                        {
+                            case SkillType.Dodge:
+                                _anim.CrossFade("Dodge", 0.1f, -1, 0);
+                                break;
 
-                        //}
+                        }
                     }
                     break;
             }
@@ -96,12 +100,29 @@ public class PlayerCtrl : MonoBehaviour
             case PlayerState.Attack:
                 UpdateAttack();
                 break;
+            case PlayerState.Skill:
+                {
+                    switch (_sType)
+                    {
+                        case SkillType.Dodge:
+                            UpdateDodge();
+                            break;
+                    }
+                }
+                break;
         }
     }
 
     void FixedUpdate()
     {
-        FreezeRotate();
+        switch (_sType)
+        {
+            default:
+                FreezeRotate();
+                break;
+            case SkillType.Dodge:
+                break;
+        }
     }
 
     void InitComponents()
@@ -127,10 +148,8 @@ public class PlayerCtrl : MonoBehaviour
         _locktarget = null;
         _nearType = InteractType.Unknown;
         _destPos = transform.position;
-
-        ActivatedInteract = false;
-        
-        
+        DodgePoint = transform.position;
+        ActiveDodge = false;
     }
 
     void FreezeRotate()
@@ -171,7 +190,7 @@ public class PlayerCtrl : MonoBehaviour
         if (_nearObj == null || _nearType == InteractType.Unknown)
             return;
 
-        if (ActivatedInteract == true)
+        if (ActiveDodge == true)
             return;
 
         if (btnDown)
@@ -193,8 +212,12 @@ public class PlayerCtrl : MonoBehaviour
 
     void OnMouseEvent(MouseEvent evt)
     {
-        if (isDead || UI_Inventory.ActivatedInventory || ActivatedInteract)
+        if (isDead || UI_Inventory.ActivatedInventory)
             return;
+
+        if (ActiveDodge == true)
+            return;
+
 
         switch (_state)
         {
@@ -248,9 +271,6 @@ public class PlayerCtrl : MonoBehaviour
 
     void UpdateMove()
     {
-        if (ActivatedInteract)
-            return;
-
         CheckAttackable();
         Vector3 dir = _destPos - transform.position;
         dir.y = 0;
@@ -284,6 +304,18 @@ public class PlayerCtrl : MonoBehaviour
             if(dir != Vector3.zero)
             {
                 Quaternion rot = Quaternion.LookRotation(dir);
+                transform.rotation = Quaternion.Lerp(transform.rotation, rot, 20.0f * Time.deltaTime);
+            }
+        }
+    }
+
+    void UpdateDodge()
+    {
+        if (DodgePoint != transform.position)
+        {
+            if(DodgePoint != Vector3.zero)
+            {
+                Quaternion rot = Quaternion.LookRotation(DodgePoint);
                 transform.rotation = Quaternion.Lerp(transform.rotation, rot, 20.0f * Time.deltaTime);
             }
         }
@@ -391,7 +423,31 @@ public class PlayerCtrl : MonoBehaviour
 
     void DodgeEffect(SOSkill sSkill)
     {
-       
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit rhit, 100.0f, (1 << (int)LayerType.Floor)))
+        {
+            DodgePoint= rhit.point - transform.position;
+            DodgePoint.y = 0;
+            DodgePoint = DodgePoint.normalized;
+
+            StopCoroutine(OnDodgeEvent(sSkill.effectValue,DodgePoint));
+            StartCoroutine(OnDodgeEvent(sSkill.effectValue, DodgePoint));
+        }
+    }
+
+    IEnumerator OnDodgeEvent(float power,Vector3 dir)
+    {
+        _sType = SkillType.Dodge;
+        State = PlayerState.Skill;
+        ActiveDodge = true;
+        _rb.AddForce(dir * power, ForceMode.Impulse);
+        yield return new WaitForSeconds(0.7f);
+
+        DodgePoint = transform.position;
+        _destPos = transform.position;
+        ActiveDodge = false;
+        _sType = SkillType.Unknown;
+        State = PlayerState.Move;
     }
 
     IEnumerator InstanceParticle(string name)
@@ -407,32 +463,7 @@ public class PlayerCtrl : MonoBehaviour
         go.DestroyAPS();
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        //if (other.CompareTag(Util.ConvertEnum(TagType.Interactive)))
-        //{
-        //    _nearObj = other.gameObject;
-        //    if(_nearObj.TryGetComponent<InteractObject>(out InteractObject io))
-        //    {
-        //        if(io.Type == InteractType.RootItem)
-        //        {
-        //            if(_nearObj.TryGetComponent<Item>(out Item item))
-        //            {
-        //                if(item.itemSO.iType == ItemType.Gold)
-        //                {
-        //                    item.Root();
-        //                    ClearNearObject();
-        //                }
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        ClearNearObject();
-        //    }
-        //}
-    }
-
+    
     void OnTriggerStay(Collider other)
     {
         if (other.CompareTag(Util.ConvertEnum(TagType.Interactive)))

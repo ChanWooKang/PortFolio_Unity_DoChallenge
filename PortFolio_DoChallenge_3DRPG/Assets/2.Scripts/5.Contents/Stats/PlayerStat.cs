@@ -248,18 +248,6 @@ public class PlayerStat : BaseStat
                 break;
         }
 
-        if(value < 0)
-        {
-            if(_hp > _maxhp)
-            {
-                
-            }
-            
-            if(_mp > MaxMP)
-            {
-
-            }
-        }
     }
 
     public void UsePotion(StatType type, float value)
