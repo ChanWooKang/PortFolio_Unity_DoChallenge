@@ -16,5 +16,5 @@ MonoBehaviour:
   skillName: Dodge
   key: 32
   cool: 5
-  effectValue: 3
+  effectValue: 13
   sList: []
