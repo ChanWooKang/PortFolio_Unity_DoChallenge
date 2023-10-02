@@ -69,7 +69,8 @@ public class UI_STAT : UI_Base
         else
             list_Texts[(int)Texts.MaxExp].text = "Error";
         if (pStat.HP > 0)
-            list_Texts[(int)Texts.CurrHp].text = string.Format("{0:#,###}", Mathf.Min(pStat.HP, pStat.MaxHP));
+            list_Texts[(int)Texts.CurrHp].text = string.Format("{0:#,###}", 
+                Mathf.Min(pStat.HP, pStat.MaxHP));
         else
             list_Texts[(int)Texts.CurrHp].text = string.Format("0");
         list_Texts[(int)Texts.MaxHp].text = string.Format("{0:#,###}", pStat.MaxHP);
